@@ -3,11 +3,12 @@ import java.util.List;
 
 public class Staff {
 
-     String id;
-     String name;
-     String phone;
-     String email;
-     String shift;
+     private String id;
+    private String name;
+    private String phone;
+    private String email;
+    private String shift;
+
 
     public static int totalStaff = 0;
     public List<String> acceptedRequests;

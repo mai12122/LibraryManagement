@@ -3,11 +3,12 @@ import java.util.List;
 
 public class Lecturer {
 
-     String id;
-     String name;
-     String password;
-     String email;
-     List<String> recommendedBooks;
+    private String id;
+    private String name;
+    private String password;
+    private String email;
+    private List<String> recommendedBooks;
+
 
     public static int totalLecturers = 0;
 
@@ -64,9 +65,8 @@ public class Lecturer {
     }
 
     public static void main(String[] args) {
-        List<Lecturer> lecturers = new ArrayList<>();
-
-        List<String> books1 = new ArrayList<>();
+        List<Lecturer> lecturers = new ArrayList<Lecturer>();
+        List<String> books1 = new ArrayList<String>();
         books1.add("Clean Code");
         books1.add("Refactoring");
 

@@ -2,13 +2,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Book {
-     String id;
-     String title;
-     String author;
-     String genre;
-     String availabilityStatus;
-     String isbnNumber;
-     String locationOnShelf;
+    private String id;
+    private String title;
+    private String author;
+    private String genre;
+    private String availabilityStatus;
+    private String isbnNumber;
+    private String locationOnShelf;
+
 
     public static int totalBooks = 0;
     public Book(String id, String title, String author, String genre,
@@ -68,7 +69,7 @@ public class Book {
         System.out.println("Shelf Location    : " + locationOnShelf);
     }
     public static void main(String[] args) {
-        List<Book> books = new ArrayList<>();
+        List<Book> books = new ArrayList<Book>();
 
         Book b1 = new Book("B001", "The Alchemist", "Paulo Coelho", "Fiction", "Available", "123456789", "Shelf A3");
         Book b2 = new Book("B002", "Clean Code", "Robert C. Martin", "Programming", "Borrowed", "987654321", "Shelf B1");

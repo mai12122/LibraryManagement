@@ -1,11 +1,11 @@
 import java.time.LocalDate;
 public class Student {
-    String id;
-    String name;
-    String email;
-    String password;
-    LocalDate enrollmentDate;
-    String status;
+    private String id;
+    private String name;
+    private String email;
+    private String password;
+    private LocalDate enrollmentDate;
+    private String status;
 
     public static int totalStudents = 0;
 

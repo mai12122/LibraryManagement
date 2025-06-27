@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+
 public class Borrowing {
      String borrowingId;
      String bookTitle;
@@ -74,7 +75,7 @@ public class Borrowing {
         System.out.println("Times Renewed: " + timesRenewed);
     }
     public static void main(String[] args) {
-        List<Borrowing> borrowings = new ArrayList<>();
+        List<Borrowing> borrowings = new ArrayList<Borrowing>();
         Borrowing b1 = new Borrowing("BR001", "Clean Code", "STU123", "2025-06-01", "2025-06-15");
         Borrowing b2 = new Borrowing("BR002", "Java Basics", "STU456", "2025-06-03", "2025-06-17", "2025-06-12", "LEC001", 1);
         borrowings.add(b1);

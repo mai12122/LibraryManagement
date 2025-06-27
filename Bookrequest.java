@@ -2,11 +2,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bookrequest {
-     String requestId;
-     String bookTitle;
-     String bookAuthor;
-     String bookGenre;
-     String status;
+     private String requestId;
+    private String bookTitle;
+    private String bookAuthor;
+    private String bookGenre;
+    private String status;
+
     public static int totalRequests = 0;
     public Bookrequest(String requestId, String bookTitle, String bookAuthor, String bookGenre, String status) {
         this.requestId = requestId;
@@ -25,8 +26,7 @@ public class Bookrequest {
     }
 
     public String getBookTitle() {
-        return bookTitle;
-    }
+        return bookTitle;    }
     public String getBookAuthor() {
         return bookAuthor;
     }
@@ -52,7 +52,7 @@ public class Bookrequest {
     }
 
     public static void main(String[] args) {
-        List<Bookrequest> requests = new ArrayList<>();
+        List<Bookrequest> requests = new ArrayList<Bookrequest>();
 
         Bookrequest r1 = new Bookrequest("R001", "Harry Potter", "J.K. Rowling", "Fantasy");
         Bookrequest r2 = new Bookrequest("R002", "The Hobbit", "J.R.R. Tolkien", "Adventure", "Approved");
