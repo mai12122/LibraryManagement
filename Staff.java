@@ -1,17 +1,16 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Staff {
 
-     private String id;
+    private String id;
     private String name;
     private String phone;
     private String email;
     private String shift;
 
-
     public static int totalStaff = 0;
-    public List<String> acceptedRequests;
+    public Set<String> acceptedRequests;
 
     public Staff(String id, String name, String phone, String email, String shift) {
         this.id = id;
@@ -19,7 +18,7 @@ public class Staff {
         this.phone = phone;
         this.email = email;
         this.shift = shift;
-        this.acceptedRequests = new ArrayList<>();
+        this.acceptedRequests = new HashSet<>();
         totalStaff++;
     }
 

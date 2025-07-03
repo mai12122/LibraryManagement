@@ -1,5 +1,5 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Book {
     private String id;
@@ -10,8 +10,8 @@ public class Book {
     private String isbnNumber;
     private String locationOnShelf;
 
+    private static int totalBooks = 0;
 
-    public static int totalBooks = 0;
     public Book(String id, String title, String author, String genre,
                 String availabilityStatus, String isbnNumber, String locationOnShelf) {
         this.id = id;
@@ -23,42 +23,15 @@ public class Book {
         this.locationOnShelf = locationOnShelf;
         totalBooks++;
     }
+
     public Book(String id, String title, String author) {
         this(id, title, author, "Unknown", "Available", "N/A", "Not Assigned");
-    }
-    public String getId() {
-        return id;
-    }
-    public String getTitle() {
-        return title;
-    }
-    public String getAuthor() {
-        return author;
-    }
-    public String getGenre() {
-        return genre;
-    }
-    public String getAvailabilityStatus() {
-        return availabilityStatus;
-    }
-    public String getIsbnNumber() {
-        return isbnNumber;
-    }
-    public String getLocationOnShelf() {
-        return locationOnShelf;
-    }
-
-    public void setAvailabilityStatus(String availabilityStatus) {
-        this.availabilityStatus = availabilityStatus;
-    }
-
-    public void setLocationOnShelf(String locationOnShelf) {
-        this.locationOnShelf = locationOnShelf;
     }
 
     public static int getTotalBooks() {
         return totalBooks;
     }
+
     public void displayInfo() {
         System.out.println("Book ID           : " + id);
         System.out.println("Title             : " + title);
@@ -68,8 +41,22 @@ public class Book {
         System.out.println("ISBN              : " + isbnNumber);
         System.out.println("Shelf Location    : " + locationOnShelf);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Book book = (Book) obj;
+        return id.equals(book.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
     public static void main(String[] args) {
-        List<Book> books = new ArrayList<Book>();
+        Set<Book> books = new HashSet<Book>();
 
         Book b1 = new Book("B001", "The Alchemist", "Paulo Coelho", "Fiction", "Available", "123456789", "Shelf A3");
         Book b2 = new Book("B002", "Clean Code", "Robert C. Martin", "Programming", "Borrowed", "987654321", "Shelf B1");
@@ -83,6 +70,7 @@ public class Book {
             book.displayInfo();
             System.out.println("------------------------");
         }
+
         System.out.println("Total Books: " + Book.getTotalBooks());
     }
 }

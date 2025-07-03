@@ -1,4 +1,7 @@
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
 public class Student {
     private String id;
     private String name;
@@ -13,7 +16,7 @@ public class Student {
         this.id = id;
         this.name = name;
         setEmail(email);
-        this.password = password;
+        setPassword(password);
         this.enrollmentDate = enrollmentDate;
         this.status = status;
         totalStudents++;
@@ -23,29 +26,12 @@ public class Student {
         this(id, name, "noemail@example.com", "defaultpass", LocalDate.now(), "active");
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public LocalDate getEnrollmentDate() {
-        return enrollmentDate;
-    }
-
-    public String getStatus() {
-        return status;
-    }
+    public String getId() { return id; }
+    public String getName() { return name; }
+    public String getEmail() { return email; }
+    public String getPassword() { return password; }
+    public LocalDate getEnrollmentDate() { return enrollmentDate; }
+    public String getStatus() { return status; }
 
     public void setEmail(String email) {
         if (email != null && email.contains("@")) {
@@ -74,6 +60,7 @@ public class Student {
     public static int getTotalStudents() {
         return totalStudents;
     }
+
     public void displayInfo() {
         System.out.println("Student ID     : " + id);
         System.out.println("Name           : " + name);
@@ -81,12 +68,33 @@ public class Student {
         System.out.println("Enrollment Date: " + enrollmentDate);
         System.out.println("Status         : " + status);
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Student)) return false;
+        Student other = (Student) obj;
+        return id.equals(other.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
     public static void main(String[] args) {
+        Set<Student> students = new HashSet<Student>();
+
         Student s1 = new Student("ST001", "Sokha", "sokha@example.com", "pass123", LocalDate.of(2024, 9, 1), "active");
         Student s2 = new Student("ST002", "Rithy");
-        s1.displayInfo();
-        System.out.println("--------------------");
-        s2.displayInfo();
+
+        students.add(s1);
+        students.add(s2);
+
+        for (Student s : students) {
+            s.displayInfo();
+            System.out.println("--------------------");
+        }
+
         System.out.println("Total Students: " + Student.getTotalStudents());
     }
 }
