@@ -2,17 +2,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Bookrequest {
-    // Fields (Attributes)
+    // Fields
     private String requestId;
     private String bookTitle;
     private String bookAuthor;
     private String bookGenre;
     private String status;
 
-    // Static field to track total requests
+    // Static field 
     public static int totalRequests = 0;
 
-    // Constructor with all fields
+    // Constructor
     public Bookrequest(String requestId, String bookTitle, String bookAuthor, String bookGenre, String status) {
         this.requestId = requestId;
         this.bookTitle = bookTitle;
@@ -22,7 +22,7 @@ public class Bookrequest {
         totalRequests++;
     }
 
-    // Overloaded constructor with default status
+    // Overloaded constructor
     public Bookrequest(String requestId, String bookTitle, String bookAuthor, String bookGenre) {
         this(requestId, bookTitle, bookAuthor, bookGenre, "Pending");
     }
@@ -48,17 +48,16 @@ public class Bookrequest {
         return status;
     }
 
-    // Setter for status
+    // Setter 
     public void setStatus(String status) {
         this.status = status;
     }
 
-    // Static method to get total requests
+    // Static method 
     public static int getTotalRequests() {
         return totalRequests;
     }
 
-    // Method to display book request information
     public void displayInfo() {
         System.out.println("Request ID: " + requestId);
         System.out.println("Title     : " + bookTitle);
@@ -82,7 +81,6 @@ public class Bookrequest {
     }
 
     public static void main(String[] args) {
-        // Creating a HashSet to store unique book requests
          Set<Bookrequest> requests = new HashSet<Bookrequest>();
         Bookrequest r1 = new Bookrequest("R001", "Harry Potter", "J.K. Rowling", "Fantasy");
         Bookrequest r2 = new Bookrequest("R002", "The Hobbit", "J.R.R. Tolkien", "Adventure", "Approved");
