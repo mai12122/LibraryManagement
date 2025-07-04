@@ -81,28 +81,19 @@ public class Bookrequest {
         return requestId.hashCode();
     }
 
-    // Main method to demonstrate usage
     public static void main(String[] args) {
         // Creating a HashSet to store unique book requests
          Set<Bookrequest> requests = new HashSet<Bookrequest>();
-
-        // Creating book request objects
         Bookrequest r1 = new Bookrequest("R001", "Harry Potter", "J.K. Rowling", "Fantasy");
         Bookrequest r2 = new Bookrequest("R002", "The Hobbit", "J.R.R. Tolkien", "Adventure", "Approved");
         Bookrequest r3 = new Bookrequest("R003", "1984", "George Orwell", "Dystopian");
-
-        // Adding requests to the HashSet
         requests.add(r1);
         requests.add(r2);
         requests.add(r3);
-
-        // Displaying information of each request
         for (Bookrequest request : requests) {
             request.displayInfo();
             System.out.println("------------------------");
         }
-
-        // Displaying total number of book requests
         System.out.println("Total Book Requests: " + Bookrequest.getTotalRequests());
     }
 }

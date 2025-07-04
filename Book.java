@@ -31,6 +31,13 @@ public class Book {
     public static int getTotalBooks() {
         return totalBooks;
     }
+    public String getTitle() {
+    return title;
+    }
+
+    public String getAuthor() {
+    return author;
+    }
 
     public void displayInfo() {
         System.out.println("Book ID           : " + id);
