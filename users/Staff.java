@@ -1,5 +1,7 @@
-import java.util.HashSet;
+package users;
+
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Staff {
 
@@ -8,9 +10,9 @@ public class Staff {
     private String phone;
     private String email;
     private String shift;
+    private Set<String> acceptedRequests;
 
-    public static int totalStaff = 0;
-    public Set<String> acceptedRequests;
+    private static int totalStaff = 0;
 
     public Staff(String id, String name, String phone, String email, String shift) {
         this.id = id;
@@ -18,22 +20,42 @@ public class Staff {
         this.phone = phone;
         this.email = email;
         this.shift = shift;
-        this.acceptedRequests = new HashSet<>();
+        this.acceptedRequests = new TreeSet<>();
         totalStaff++;
     }
-
     public Staff(String id, String name) {
         this(id, name, "No Phone", "noemail@example.com", "Unknown");
     }
+    public String getId() {
+        return id;
+    }
 
-    public String getId() { return id; }
-    public String getName() { return name; }
-    public String getPhone() { return phone; }
-    public String getEmail() { return email; }
-    public String getShift() { return shift; }
+    public String getName() {
+        return name;
+    }
 
-    public void setShift(String shift) { this.shift = shift; }
+    public String getPhone() {
+        return phone;
+    }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public String getShift() {
+        return shift;
+    }
+
+    public Set<String> getAcceptedRequests() {
+        return new TreeSet<>(acceptedRequests);
+    }
+
+    // Setters
+    public void setShift(String shift) {
+        this.shift = shift;
+    }
+
+    // Business logic
     public void acceptBookRequest(String requestTitle) {
         acceptedRequests.add(requestTitle);
         System.out.println(name + " accepted book request: " + requestTitle);
@@ -70,6 +92,7 @@ public class Staff {
         System.out.println("Shift    : " + shift);
     }
 
+    // Test in main
     public static void main(String[] args) {
         Staff s1 = new Staff("S001", "Mr. Vannak", "012345678", "vannak@library.com", "Morning");
         Staff s2 = new Staff("S002", "Ms. Dany");

@@ -1,18 +1,15 @@
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
-public class Bookrequest {
-    // Fields
+public class Bookrequest implements Comparable<Bookrequest> {
     private String requestId;
     private String bookTitle;
     private String bookAuthor;
     private String bookGenre;
     private String status;
 
-    // Static field 
-    public static int totalRequests = 0;
+    private static int totalRequests = 0;
 
-    // Constructor
     public Bookrequest(String requestId, String bookTitle, String bookAuthor, String bookGenre, String status) {
         this.requestId = requestId;
         this.bookTitle = bookTitle;
@@ -22,12 +19,10 @@ public class Bookrequest {
         totalRequests++;
     }
 
-    // Overloaded constructor
     public Bookrequest(String requestId, String bookTitle, String bookAuthor, String bookGenre) {
         this(requestId, bookTitle, bookAuthor, bookGenre, "Pending");
     }
 
-    // Getters
     public String getRequestId() {
         return requestId;
     }
@@ -48,12 +43,10 @@ public class Bookrequest {
         return status;
     }
 
-    // Setter 
     public void setStatus(String status) {
         this.status = status;
     }
 
-    // Static method 
     public static int getTotalRequests() {
         return totalRequests;
     }
@@ -66,13 +59,19 @@ public class Bookrequest {
         System.out.println("Status    : " + status);
     }
 
-    // Override equals and hashCode for proper HashSet behavior
+    // compareTo method for sorting by requestId
+    @Override
+    public int compareTo(Bookrequest other) {
+        return this.requestId.compareTo(other.requestId);
+    }
+
+    // equals and hashCode for correct TreeSet behavior
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Bookrequest that = (Bookrequest) obj;
-        return requestId.equals(that.requestId);
+        if (!(obj instanceof Bookrequest)) return false;
+        Bookrequest other = (Bookrequest) obj;
+        return requestId.equals(other.requestId);
     }
 
     @Override
@@ -81,17 +80,20 @@ public class Bookrequest {
     }
 
     public static void main(String[] args) {
-         Set<Bookrequest> requests = new HashSet<Bookrequest>();
-        Bookrequest r1 = new Bookrequest("R001", "Harry Potter", "J.K. Rowling", "Fantasy");
-        Bookrequest r2 = new Bookrequest("R002", "The Hobbit", "J.R.R. Tolkien", "Adventure", "Approved");
+        Set<Bookrequest> requests = new TreeSet<>();
+        Bookrequest r1 = new Bookrequest("R002", "The Hobbit", "J.R.R. Tolkien", "Adventure", "Approved");
+        Bookrequest r2 = new Bookrequest("R001", "Harry Potter", "J.K. Rowling", "Fantasy");
         Bookrequest r3 = new Bookrequest("R003", "1984", "George Orwell", "Dystopian");
+
         requests.add(r1);
         requests.add(r2);
         requests.add(r3);
+
         for (Bookrequest request : requests) {
             request.displayInfo();
             System.out.println("------------------------");
         }
+
         System.out.println("Total Book Requests: " + Bookrequest.getTotalRequests());
     }
 }

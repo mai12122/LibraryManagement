@@ -1,7 +1,8 @@
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
-public class Book {
+public class Book implements Comparable<Book> {
+
     private String id;
     private String title;
     private String author;
@@ -28,15 +29,20 @@ public class Book {
         this(id, title, author, "Unknown", "Available", "N/A", "Not Assigned");
     }
 
-    public static int getTotalBooks() {
-        return totalBooks;
+    public String getId() {
+        return id;
     }
+
     public String getTitle() {
-    return title;
+        return title;
     }
 
     public String getAuthor() {
-    return author;
+        return author;
+    }
+
+    public static int getTotalBooks() {
+        return totalBooks;
     }
 
     public void displayInfo() {
@@ -50,9 +56,14 @@ public class Book {
     }
 
     @Override
+    public int compareTo(Book other) {
+        return this.id.compareTo(other.id);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (!(obj instanceof Book)) return false;
         Book book = (Book) obj;
         return id.equals(book.id);
     }
@@ -63,11 +74,11 @@ public class Book {
     }
 
     public static void main(String[] args) {
-        Set<Book> books = new HashSet<Book>();
+        Set<Book> books = new TreeSet<>(); 
 
-        Book b1 = new Book("B001", "The Alchemist", "Paulo Coelho", "Fiction", "Available", "123456789", "Shelf A3");
-        Book b2 = new Book("B002", "Clean Code", "Robert C. Martin", "Programming", "Borrowed", "987654321", "Shelf B1");
-        Book b3 = new Book("B003", "Unknown Book", "Unknown Author");
+        Book b1 = new Book("B003", "The Alchemist", "Paulo Coelho", "Fiction", "Available", "123456789", "Shelf A3");
+        Book b2 = new Book("B001", "Clean Code", "Robert C. Martin", "Programming", "Borrowed", "987654321", "Shelf B1");
+        Book b3 = new Book("B002", "Unknown Book", "Unknown Author");
 
         books.add(b1);
         books.add(b2);
