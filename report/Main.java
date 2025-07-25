@@ -36,7 +36,7 @@ public class Main {
         Borrowing b1 = new Borrowing("B001", "Librarian", "2025-07-20",
                 "Harry Potter", "STU123", "2025-07-20", "2025-08-03");
 
-        ExtendedBorrowing eb1 = new ExtendedBorrowing("EB001", "Admin", "2025-07-15",
+        bookReport eb1 = new bookReport("EB001", "Admin", "2025-07-15",
                 "LOTR", "STU456", "2025-07-10", "2025-08-01", "High-Level Approval");
 
         TreeSet<Report> reports = new TreeSet<>((rpt1, rpt2) -> rpt1.getId().compareTo(rpt2.getId()));

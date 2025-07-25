@@ -1,8 +1,9 @@
 package report;
-public class ExtendedBorrowing extends Borrowing {
+
+public class bookReport extends Borrowing {
     private String specialApproval;
 
-    public ExtendedBorrowing(String id, String generatedBy, String generatedDate,
+    public bookReport(String id, String generatedBy, String generatedDate,
                              String bookTitle, String borrowerId, String dateBorrowed,
                              String dueDate, String specialApproval) {
         super(id, generatedBy, generatedDate, bookTitle, borrowerId, dateBorrowed, dueDate);
@@ -35,6 +36,6 @@ public class ExtendedBorrowing extends Borrowing {
     @Override
     public boolean isValid() {
         return super.isValid()
-            && specialApproval != null && !specialApproval.isEmpty();
+            && specialApproval != null && !specialApproval.isBlank();
     }
 }
