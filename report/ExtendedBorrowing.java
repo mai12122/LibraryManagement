@@ -1,5 +1,4 @@
 package report;
-
 public class ExtendedBorrowing extends Borrowing {
     private String specialApproval;
 
@@ -11,24 +10,31 @@ public class ExtendedBorrowing extends Borrowing {
     }
 
     public String getSpecialApproval() {
-        System.out.println("getSpecialApproval() called, returning: " + specialApproval);
         return specialApproval;
     }
 
     public void setSpecialApproval(String specialApproval) {
-        System.out.println("setSpecialApproval() called, setting to: " + specialApproval);
         this.specialApproval = specialApproval;
     }
 
     public void renew() {
-        System.out.println("Renewing borrowing record...");
         setTimesRenewed(getTimesRenewed() + 1);
-        System.out.println("Times renewed now: " + getTimesRenewed());
     }
 
     @Override
     public void displayReport() {
         super.displayReport();
         System.out.println("Special Approval: " + specialApproval);
+    }
+
+    @Override
+    public String exportReport() {
+        return super.exportReport() + "\nSpecial Approval: " + specialApproval;
+    }
+
+    @Override
+    public boolean isValid() {
+        return super.isValid()
+            && specialApproval != null && !specialApproval.isEmpty();
     }
 }

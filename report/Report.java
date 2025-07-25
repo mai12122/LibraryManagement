@@ -42,4 +42,6 @@ public abstract class Report {
     }
 
     public abstract void displayReport();
+    public abstract String exportReport();
+    public abstract boolean isValid();
 }
