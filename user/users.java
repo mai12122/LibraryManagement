@@ -1,12 +1,12 @@
 package user;
 
 public class users {
-    protected String id;
-    protected String name;
-    protected String email;
-    protected String password;
+    private String id;
+    private String name;
+    private String email;
+    private String password;
 
-    public users(String id, String name, String email, String password) {
+    protected users(String id, String name, String email, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -29,7 +29,7 @@ public class users {
         return email;
     }
 
-    public String getPassword() {
+    protected String getPassword() {
         System.out.println("getPassword() called, returning: " + password);
         return password;
     }

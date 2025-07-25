@@ -5,22 +5,17 @@ public class Borrowing extends Report {
     private String borrowerId;
     private String dateBorrowed;
     private String dueDate;
-    private String dateReturned;
-    private String approvedById;
     private int timesRenewed;
 
-    public Borrowing(String id, String generated_by, String generated_date,
+    public Borrowing(String id, String generatedBy, String generatedDate,
                      String bookTitle, String borrowerId, String dateBorrowed,
-                     String dueDate, String dateReturned, String approvedById,
-                     int timesRenewed) {
-        super(id, generated_by, generated_date);
+                     String dueDate) {
+        super(id, generatedBy, generatedDate);
         this.bookTitle = bookTitle;
         this.borrowerId = borrowerId;
         this.dateBorrowed = dateBorrowed;
         this.dueDate = dueDate;
-        this.dateReturned = dateReturned;
-        this.approvedById = approvedById;
-        this.timesRenewed = timesRenewed;
+        this.timesRenewed = 0;
     }
 
     public String getBookTitle() {
@@ -63,26 +58,6 @@ public class Borrowing extends Report {
         this.dueDate = dueDate;
     }
 
-    public String getDateReturned() {
-        System.out.println("getDateReturned() called, returning: " + dateReturned);
-        return dateReturned;
-    }
-
-    public void setDateReturned(String dateReturned) {
-        System.out.println("setDateReturned() called, setting to: " + dateReturned);
-        this.dateReturned = dateReturned;
-    }
-
-    public String getApprovedById() {
-        System.out.println("getApprovedById() called, returning: " + approvedById);
-        return approvedById;
-    }
-
-    public void setApprovedById(String approvedById) {
-        System.out.println("setApprovedById() called, setting to: " + approvedById);
-        this.approvedById = approvedById;
-    }
-
     public int getTimesRenewed() {
         System.out.println("getTimesRenewed() called, returning: " + timesRenewed);
         return timesRenewed;
@@ -91,6 +66,12 @@ public class Borrowing extends Report {
     public void setTimesRenewed(int timesRenewed) {
         System.out.println("setTimesRenewed() called, setting to: " + timesRenewed);
         this.timesRenewed = timesRenewed;
+    }
+
+    public void extendDueDate(String newDueDate) {
+        System.out.println("Due date extended from " + dueDate + " to " + newDueDate);
+        this.dueDate = newDueDate;
+        this.timesRenewed++;
     }
 
     @Override
@@ -102,8 +83,6 @@ public class Borrowing extends Report {
         System.out.println("Borrower ID: " + borrowerId);
         System.out.println("Date Borrowed: " + dateBorrowed);
         System.out.println("Due Date: " + dueDate);
-        System.out.println("Date Returned: " + dateReturned);
-        System.out.println("Approved By: " + approvedById);
         System.out.println("Times Renewed: " + timesRenewed);
     }
 }

@@ -1,5 +1,5 @@
 package report;
-
+//super class//
 public abstract class Report {
     private String id;
     private String generated_by;

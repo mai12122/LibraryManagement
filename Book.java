@@ -74,7 +74,7 @@ public class Book implements Comparable<Book> {
     }
 
     public static void main(String[] args) {
-        Set<Book> books = new TreeSet<>(); 
+        Set<Book> books = new TreeSet<Book>(); 
 
         Book b1 = new Book("B003", "The Alchemist", "Paulo Coelho", "Fiction", "Available", "123456789", "Shelf A3");
         Book b2 = new Book("B001", "Clean Code", "Robert C. Martin", "Programming", "Borrowed", "987654321", "Shelf B1");
