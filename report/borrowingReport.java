@@ -11,86 +11,106 @@ public class borrowingReport extends Report {
     private int totalTimesBorrowed;
 
     public borrowingReport(String id, String generatedBy, String generatedDate,
-                           String bookTitle, String borrowerId, LocalDate dateBorrowed,
-                           LocalDate dueDate, int totalTimesBorrowed) {
-        super(id, generatedBy, generatedDate);
+                       String bookTitle, String borrowerId, LocalDate dateBorrowed,
+                       LocalDate dueDate, int totalTimesBorrowed) {
+    super(id, generatedBy, generatedDate);
+    setBookTitle(bookTitle);
+    setBorrowerId(borrowerId);
+    setDateBorrowed(dateBorrowed);
+    setDueDate(dueDate);
+    setTotalTimesBorrowed(totalTimesBorrowed);
+    setTimesRenewed(0);
+}
+
+public String getBookTitle() {
+    if (bookTitle == null || bookTitle.isEmpty()) {
+        return "Title not available";
+    }
+    return bookTitle;
+}
+public void setBookTitle(String bookTitle) {
+    if (bookTitle != null && !bookTitle.trim().isEmpty()) {
         this.bookTitle = bookTitle;
-        this.borrowerId = borrowerId;
-        this.dateBorrowed = dateBorrowed;
-        this.dueDate = dueDate;
-        this.totalTimesBorrowed = totalTimesBorrowed;
-        this.timesRenewed = 0;
     }
+}
 
-    public String getBookTitle() {
-        return bookTitle;
+public String getBorrowerId() {
+    if (borrowerId == null || borrowerId.trim().isEmpty()) {
+        return "No borrower assigned";
     }
+    return borrowerId;
+}
 
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
-    }
-
-    public String getBorrowerId() {
-        return borrowerId;
-    }
-
-    public void setBorrowerId(String borrowerId) {
+public void setBorrowerId(String borrowerId) {
+    if (borrowerId != null && !borrowerId.trim().isEmpty()) {
         this.borrowerId = borrowerId;
     }
+}
 
-    public LocalDate getDateBorrowed() {
-        return dateBorrowed;
-    }
+public LocalDate getDateBorrowed() {
+    return dateBorrowed;
+}
 
-    public void setDateBorrowed(LocalDate dateBorrowed) {
+public void setDateBorrowed(LocalDate dateBorrowed) {
+    if (dateBorrowed != null && !dateBorrowed.isAfter(LocalDate.now())) {
         this.dateBorrowed = dateBorrowed;
     }
+}
 
-    public LocalDate getDueDate() {
-        return dueDate;
-    }
+public LocalDate getDueDate() {
+    return dueDate;
+}
 
-    public void setDueDate(LocalDate dueDate) {
+public void setDueDate(LocalDate dueDate) {
+    if (dueDate != null && (dateBorrowed == null || !dueDate.isBefore(dateBorrowed))) {
         this.dueDate = dueDate;
     }
+}
 
-    public int getTimesRenewed() {
-        return timesRenewed;
-    }
+public int getTimesRenewed() {
+    return timesRenewed;
+}
 
-    public void setTimesRenewed(int timesRenewed) {
+public void setTimesRenewed(int timesRenewed) {
+    if (timesRenewed >= 0) {
         this.timesRenewed = timesRenewed;
     }
+}
 
-    public int getTotalTimesBorrowed() {
-        return totalTimesBorrowed;
-    }
+public int getTotalTimesBorrowed() {
+    return totalTimesBorrowed;
+}
 
-    public void setTotalTimesBorrowed(int totalTimesBorrowed) {
+public void setTotalTimesBorrowed(int totalTimesBorrowed) {
+    if (totalTimesBorrowed >= 0) {
         this.totalTimesBorrowed = totalTimesBorrowed;
     }
+}
 
-    public void incrementTimesBorrowed() {
-        this.totalTimesBorrowed++;
-    }
+public void incrementTimesBorrowed() {
+    this.totalTimesBorrowed++;
+}
 
-    public void extendDueDate(LocalDate newDueDate) {
+public void extendDueDate(LocalDate newDueDate) {
+    if (newDueDate != null && (dueDate == null || newDueDate.isAfter(dueDate))) {
         this.dueDate = newDueDate;
         this.timesRenewed++;
     }
-    
-    public String calculateSummary() {
-        return String.format(
-            "Book: '%s' has been borrowed %d times. Last borrowed by ID '%s' on %s (due on %s). Renewed %d times.",
-            bookTitle,
-            totalTimesBorrowed,
-            borrowerId,
-            dateBorrowed,
-            dueDate,
-            timesRenewed
-        );
-    }
+}
 
+    @Override
+    public String calculateSummary() {
+    long daysUntilDue = (dueDate == null) ? -1 : java.time.temporal.ChronoUnit.DAYS.between(LocalDate.now(), dueDate);
+
+    String dueInfo = (dueDate == null) ? "Due date not set"
+                    : (daysUntilDue < 0) ? "Overdue"
+                    : (daysUntilDue == 0) ? "Due today"
+                    : "Due in " + daysUntilDue + " day" + (daysUntilDue > 1 ? "s" : "");
+
+    return "Book '" + getBookTitle() + "' is " + dueInfo + ". Borrowed " + getTotalTimesBorrowed() +
+           " time" + (getTotalTimesBorrowed() == 1 ? "" : "s") + ", renewed " + getTimesRenewed() +
+           " time" + (getTimesRenewed() == 1 ? "" : "s") + ".";
+    }
     @Override
     public String toString() {
         return "borrowingReport{" +
@@ -104,5 +124,20 @@ public class borrowingReport extends Report {
                 ", timesRenewed=" + timesRenewed +
                 ", totalTimesBorrowed=" + totalTimesBorrowed +
                 '}';
+    }
+    @Override
+    public boolean equals(Object obj) {
+    if (!super.equals(obj)) return false;
+    if (!(obj instanceof borrowingReport)) return false;
+    borrowingReport other = (borrowingReport) obj;
+    return getBookTitle().equals(other.getBookTitle())
+        && getBorrowerId().equals(other.getBorrowerId())
+        && getDateBorrowed().equals(other.getDateBorrowed())
+        && getDueDate().equals(other.getDueDate())
+        && getTimesRenewed() == other.getTimesRenewed()
+        && getTotalTimesBorrowed() == other.getTotalTimesBorrowed();
+    }
+    public static String getReportType() {
+    return "Borrowing Report";
     }
 }
