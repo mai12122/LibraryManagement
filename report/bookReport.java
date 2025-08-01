@@ -1,12 +1,15 @@
 package report;
 
-public class bookReport extends Borrowing {
+import java.time.LocalDate;
+
+public class bookReport extends borrowingReport {
     private String specialApproval;
 
     public bookReport(String id, String generatedBy, String generatedDate,
-                             String bookTitle, String borrowerId, String dateBorrowed,
-                             String dueDate, String specialApproval) {
-        super(id, generatedBy, generatedDate, bookTitle, borrowerId, dateBorrowed, dueDate);
+                      String bookTitle, String borrowerId,
+                      LocalDate dateBorrowed, LocalDate dueDate,
+                      String specialApproval) {
+        super(id, generatedBy, generatedDate, bookTitle, borrowerId, dateBorrowed, dueDate, 0);
         this.specialApproval = specialApproval;
     }
 
@@ -23,19 +26,18 @@ public class bookReport extends Borrowing {
     }
 
     @Override
-    public void displayReport() {
-        super.displayReport();
-        System.out.println("Special Approval: " + specialApproval);
-    }
-
-    @Override
-    public String exportReport() {
-        return super.exportReport() + "\nSpecial Approval: " + specialApproval;
-    }
-
-    @Override
-    public boolean isValid() {
-        return super.isValid()
-            && specialApproval != null && !specialApproval.isBlank();
+    public String toString() {
+        return "bookReport {" +
+               "\n  id='" + getId() + '\'' +
+               ",\n  generatedBy='" + getGeneratedBy() + '\'' +
+               ",\n  generatedDate='" + getGeneratedDate() + '\'' +
+               ",\n  bookTitle='" + getBookTitle() + '\'' +
+               ",\n  borrowerId='" + getBorrowerId() + '\'' +
+               ",\n  dateBorrowed=" + getDateBorrowed() +
+               ",\n  dueDate=" + getDueDate() +
+               ",\n  timesRenewed=" + getTimesRenewed() +
+               ",\n  totalTimesBorrowed=" + getTotalTimesBorrowed() +
+               ",\n  specialApproval='" + specialApproval + '\'' +
+               "\n}";
     }
 }
