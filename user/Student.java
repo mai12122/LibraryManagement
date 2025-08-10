@@ -7,36 +7,52 @@ public class Student extends users {
     private LocalDate enrollmentDate; 
 
     public Student(String id, String name, String email, String password, String studentClass, LocalDate enrollmentDate) {
-        super(id, name, email, password);
-        System.out.println("Student constructor called with studentClass: " + studentClass + ", enrollmentDate: " + enrollmentDate);
-        this.studentClass = studentClass;
-        this.enrollmentDate = enrollmentDate;
+        super();
+        setId(id);
+        setName(name);
+        setEmail(email);
+        setPassword(password);
+        setStudentClass(studentClass);
+        setEnrollmentDate(enrollmentDate);
+        accountList.add(this);
     }
 
     public void displayStudent() {
-        System.out.println("Displaying Student info:");
+        System.out.println("Student Information:");
         displayInfo();
         System.out.println("Student Class: " + studentClass);
         System.out.println("Enrollment Date: " + enrollmentDate);
     }
 
     public String getStudentClass() {
-        System.out.println("getStudentClass() called, returning: " + studentClass);
+        if (studentClass == null || studentClass.equals("Unknown")) {
+            System.out.println("Warning: Student class is not set.");
+        }
         return studentClass;
     }
 
     public void setStudentClass(String studentClass) {
-        System.out.println("setStudentClass() called, setting to: " + studentClass);
-        this.studentClass = studentClass;
+        if (studentClass == null || studentClass.trim().isEmpty()) {
+            System.out.println("Invalid student class. Setting to 'Unknown'.");
+            this.studentClass = "Unknown";
+        } else {
+            this.studentClass = studentClass;
+        }
     }
 
     public LocalDate getEnrollmentDate() {
-        System.out.println("getEnrollmentDate() called, returning: " + enrollmentDate);
+        if (enrollmentDate == null) {
+            System.out.println("Warning: Enrollment date is not set.");
+        }
         return enrollmentDate;
     }
 
     public void setEnrollmentDate(LocalDate enrollmentDate) {
-        System.out.println("setEnrollmentDate() called, setting to: " + enrollmentDate);
-        this.enrollmentDate = enrollmentDate;
+        if (enrollmentDate == null) {
+            System.out.println("Invalid enrollment date. Setting to current date.");
+            this.enrollmentDate = LocalDate.now();
+        } else {
+            this.enrollmentDate = enrollmentDate;
+        }
     }
 }

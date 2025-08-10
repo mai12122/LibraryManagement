@@ -1,6 +1,19 @@
 package minterface;
 
+import user.users;
+
 public interface Authentication {
-    void register();
-    void login(String email, String password);
+
+    public abstract void register();
+    
+    public static boolean login(users account)
+    {
+        for (users acc : users.accountList) {
+            if (account.equals(acc)) {
+                return true;
+            }
+            
+        }
+        return false;
+    }
 }

@@ -3,7 +3,7 @@ package report;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class Report {
+public abstract class Report {
     private String id;
     private String generated_by;
     private String generated_date;
@@ -78,13 +78,13 @@ public class Report {
     }
 
     public String calculateSummary() {
-    LocalDate reportDate = LocalDate.parse(generated_date); 
-    long daysOld = ChronoUnit.DAYS.between(reportDate, LocalDate.now());
+        LocalDate reportDate = LocalDate.parse(generated_date);
+        long daysOld = ChronoUnit.DAYS.between(reportDate, LocalDate.now());
 
-    String urgency = (daysOld <= 3) ? "High" :
-                     (daysOld <= 7) ? "Medium" : "Low";
-    return "Report is " + daysOld + " days old (" + urgency + " urgency).";
-}
+        String urgency = (daysOld <= 3) ? "High" :
+                         (daysOld <= 7) ? "Medium" : "Low";
+        return "Report is " + daysOld + " days old (" + urgency + " urgency).";
+    }
 
     @Override
     public boolean equals(Object obj) {

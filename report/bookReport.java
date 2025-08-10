@@ -5,37 +5,38 @@ import java.time.LocalDate;
 public class bookReport extends borrowingReport {
     private String specialApproval;
 
-        public bookReport(String id, String generatedBy, String generatedDate,
+    public bookReport(String id, String generatedBy, String generatedDate,
                       String bookTitle, String borrowerId,
                       LocalDate dateBorrowed, LocalDate dueDate,
                       String specialApproval) {
         super(id, generatedBy, generatedDate, bookTitle, borrowerId, dateBorrowed, dueDate, 0);
-        setSpecialApproval(specialApproval);  
+        setSpecialApproval(specialApproval);
     }
 
-  public String getSpecialApproval() {
-    if (specialApproval != null && !specialApproval.isEmpty()) {
-        return specialApproval;
-    } else {
-        return "No special approval granted";
+    public String getSpecialApproval() {
+        if (specialApproval != null && !specialApproval.isEmpty()) {
+            return specialApproval;
+        } else {
+            return "No special approval granted";
+        }
     }
-}
-public void setSpecialApproval(String specialApproval) {
-    if (specialApproval != null && !specialApproval.trim().isEmpty()) {
-        this.specialApproval = specialApproval;
-    } else {
-        System.out.println("Invalid special approval: cannot be null or empty.");
-    }
-}
 
-public void renew() {
-    int maxRenewals = 3;
-    if (getTimesRenewed() < maxRenewals) {
-        setTimesRenewed(getTimesRenewed() + 1);
-    } else {
-        System.out.println("Renewal limit reached. Cannot renew anymore.");
+    public void setSpecialApproval(String specialApproval) {
+        if (specialApproval != null && !specialApproval.trim().isEmpty()) {
+            this.specialApproval = specialApproval;
+        } else {
+            System.out.println("Invalid special approval: cannot be null or empty.");
+        }
     }
-}
+
+    public void renew() {
+        int maxRenewals = 3;
+        if (getTimesRenewed() < maxRenewals) {
+            setTimesRenewed(getTimesRenewed() + 1);
+        } else {
+            System.out.println("Renewal limit reached. Cannot renew anymore.");
+        }
+    }
 
     @Override
     public String toString() {
@@ -52,7 +53,8 @@ public void renew() {
                ",\n  specialApproval='" + specialApproval + '\'' +
                "\n}";
     }
- @Override
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (!super.equals(obj)) return false;
@@ -62,7 +64,8 @@ public void renew() {
         return (specialApproval == null ? other.specialApproval == null
                 : specialApproval.equals(other.specialApproval));
     }
+
     public static String getReportType() {
         return "Book Report";
-}
+    }
 }

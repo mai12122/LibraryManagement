@@ -5,13 +5,23 @@ public class Lecturer extends users {
     private String recommendation;
 
     public Lecturer(String id, String name, String email, String password, String department) {
-        super(id, name, email, password);
-        System.out.println(" Called with department: " + department);
-        this.department = department;
+        super(); 
+
+        // Use users' validation
+        setId(id);
+        setName(name);
+        setEmail(email);
+        setPassword(password);
+
+        // Validate department
+        setDepartment(department);
+
+        // Add lecturer to the account list
+        accountList.add(this);
     }
 
     public void displayLecturer() {
-        System.out.println("Displaying Lecturer info:");
+        System.out.println("Lecturer Information:");
         displayInfo();
         System.out.println("Department: " + department);
         if (recommendation != null && !recommendation.isEmpty()) {
@@ -20,22 +30,34 @@ public class Lecturer extends users {
     }
 
     public String getDepartment() {
-        System.out.println("getDepartment() called, returning: " + department);
+        if (department == null || department.equals("Unknown")) {
+            System.out.println("Warning: Department is not set.");
+        }
         return department;
     }
 
     public void setDepartment(String department) {
-        System.out.println("setDepartment() called, setting to: " + department);
-        this.department = department;
+        if (department == null || department.trim().isEmpty()) {
+            System.out.println("Invalid department name. Setting to 'Unknown'.");
+            this.department = "Unknown";
+        } else {
+            this.department = department;
+        }
     }
 
     public String getRecommendation() {
-        System.out.println("getRecommendation() called, returning: " + recommendation);
+        if (recommendation == null) {
+            System.out.println("Warning: Recommendation is not set.");
+        }
         return recommendation;
     }
 
     public void setRecommendation(String recommendation) {
-        System.out.println("setRecommendation() called, setting to: " + recommendation);
-        this.recommendation = recommendation;
+        if (recommendation == null || recommendation.trim().isEmpty()) {
+            System.out.println("Recommendation cannot be empty. Setting to null.");
+            this.recommendation = null;
+        } else {
+            this.recommendation = recommendation;
+        }
     }
 }

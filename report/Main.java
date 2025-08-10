@@ -31,7 +31,11 @@ public class Main {
                 5
         );
 
-        TreeSet<Report> reports = new TreeSet<>((rpt1, rpt2) -> rpt1.getId().compareTo(rpt2.getId()));
+        TreeSet<Report> reports = new TreeSet<>((rpt1, rpt2) -> {
+            if (rpt1.getId() == null) return -1;
+            if (rpt2.getId() == null) return 1;
+            return rpt1.getId().compareTo(rpt2.getId());
+        });
 
         reports.add(r1);
         reports.add(b1);
