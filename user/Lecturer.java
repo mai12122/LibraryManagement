@@ -5,24 +5,13 @@ public class Lecturer extends users {
     private String recommendation;
 
     public Lecturer(String id, String name, String email, String password, String department) {
-        super(); 
-
-        // Use users' validation
-        setId(id);
-        setName(name);
-        setEmail(email);
-        setPassword(password);
-
-        // Validate department
+        super(id, name, email, password);
         setDepartment(department);
-
-        // Add lecturer to the account list
         accountList.add(this);
     }
 
     public void displayLecturer() {
         System.out.println("Lecturer Information:");
-        displayInfo();
         System.out.println("Department: " + department);
         if (recommendation != null && !recommendation.isEmpty()) {
             System.out.println("Recommendation: " + recommendation);

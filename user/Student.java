@@ -6,20 +6,15 @@ public class Student extends users {
     private String studentClass;
     private LocalDate enrollmentDate; 
 
-    public Student(String id, String name, String email, String password, String studentClass, LocalDate enrollmentDate) {
-        super();
-        setId(id);
-        setName(name);
-        setEmail(email);
-        setPassword(password);
+    protected  Student(String id, String name, String email, String password, String studentClass, LocalDate enrollmentDate) {
+        super(id, name, email, password);
         setStudentClass(studentClass);
         setEnrollmentDate(enrollmentDate);
-        accountList.add(this);
+        accountList.add(this); 
     }
 
     public void displayStudent() {
         System.out.println("Student Information:");
-        displayInfo();
         System.out.println("Student Class: " + studentClass);
         System.out.println("Enrollment Date: " + enrollmentDate);
     }

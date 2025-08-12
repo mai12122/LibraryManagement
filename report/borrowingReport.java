@@ -1,7 +1,6 @@
 package report;
 
 import java.time.LocalDate;
-
 public class borrowingReport extends Report {
     private String bookTitle;
     private String borrowerId;

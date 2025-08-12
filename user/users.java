@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import minterface.Authentication;
 
-public abstract class users implements Authentication {
+public abstract class users extends Authentication {
     private static int accountCount = 1; 
-    public static ArrayList<users> accountList = new ArrayList<>(); // Store all users
+    public static ArrayList<users> accountList = new ArrayList<>(); 
 
     private String id;
     private String name;
@@ -14,11 +14,9 @@ public abstract class users implements Authentication {
     private String email;
     private String phoneNumber;
 
-    public users() {
-        register();
-    }
-
-    public users(String email, String password) {
+    protected users(String id, String name, String email, String password) {
+        setId(id);
+        setName(name);
         setEmail(email);
         setPassword(password);
     }
@@ -31,7 +29,11 @@ public abstract class users implements Authentication {
         return name;
     }
 
-    protected String getPassword() {
+    public String getUsername() {
+        return email;
+    }
+
+    public String getPassword() {
         return password;
     }
 
@@ -57,8 +59,8 @@ public abstract class users implements Authentication {
 
     protected void setPassword(String password) {
         if (password == null || password.length() < 6) {
-            System.out.println("Password must be 8 characters long.");
-            this.password = "12345678";
+            System.out.println("Password must be at least 6 characters long.");
+            this.password = "123456";
         } else {
             this.password = password;
         }
@@ -94,7 +96,7 @@ public abstract class users implements Authentication {
         System.out.print("Enter password: ");
         setPassword(sc.nextLine());
 
-        System.out.print("Enter  email: ");
+        System.out.print("Enter email: ");
         setEmail(sc.nextLine());
 
         System.out.print("Enter phone number: ");
@@ -106,8 +108,8 @@ public abstract class users implements Authentication {
 
     @Override
     public String toString() {
-        return "User [ID=" + id + ", Name=" + name + ", Password=" + password +
-               ", Email=" + email + ", Phone=" + phoneNumber + "]";
+        return "User [ID=" + id + ", Name=" + name + ", Email=" + email + 
+               ", Password=" + password + ", Phone=" + phoneNumber + "]";
     }
 
     @Override
@@ -128,5 +130,14 @@ public abstract class users implements Authentication {
         System.out.println("Name     : " + name);
         System.out.println("Email    : " + email);
         System.out.println("Phone    : " + phoneNumber);
+    }
+
+    public void printUserInfo() {
+        displayInfo();
+        if (this instanceof Student) {
+            ((Student) this).displayStudent();
+        } else if (this instanceof Lecturer) {
+            ((Lecturer) this).displayLecturer();
+        }
     }
 }
