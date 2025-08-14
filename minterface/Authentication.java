@@ -2,50 +2,82 @@ package minterface;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import user.Lecturer;
 import user.Student;
 import user.users;
 
 public abstract class Authentication {
 
+    public static void main(String[] args) {
+        loginGUI();
+    }
+
     public abstract void register();
 
     public static void loginGUI() {
         JFrame frame = new JFrame("Login");
-        frame.setSize(420, 300);
-        frame.setLayout(null);
-        frame.getContentPane().setBackground(Color.DARK_GRAY);
+        frame.setSize(450, 350);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // Background panel with gradient
+        JPanel backgroundPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g;
+                GradientPaint gp = new GradientPaint(
+                        0, 0, new Color(58, 123, 213),
+                        0, getHeight(), new Color(58, 213, 176)
+                );
+                g2d.setPaint(gp);
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+            }
+        };
+        backgroundPanel.setLayout(null); // absolute positioning
+        frame.setContentPane(backgroundPanel);
+
+        // Title
+        JLabel title = new JLabel("Welcome Back!", SwingConstants.CENTER);
+        title.setFont(new Font("Segoe UI", Font.BOLD, 26));
+        title.setForeground(Color.WHITE);
+        title.setBounds(50, 20, 350, 40);
+        backgroundPanel.add(title);
+
+        // Username
         JLabel userLabel = new JLabel("Username (email):");
         userLabel.setForeground(Color.WHITE);
-        userLabel.setBounds(50, 50, 150, 25);
-        frame.add(userLabel);
+        userLabel.setBounds(50, 80, 150, 25);
+        backgroundPanel.add(userLabel);
 
         JTextField userText = new JTextField();
-        userText.setBounds(200, 50, 150, 25);
-        frame.add(userText);
+        userText.setBounds(200, 80, 180, 25);
+        backgroundPanel.add(userText);
 
+        // Password
         JLabel passLabel = new JLabel("Password:");
         passLabel.setForeground(Color.WHITE);
-        passLabel.setBounds(50, 100, 150, 25);
-        frame.add(passLabel);
+        passLabel.setBounds(50, 120, 150, 25);
+        backgroundPanel.add(passLabel);
 
         JPasswordField passText = new JPasswordField();
-        passText.setBounds(200, 100, 150, 25);
-        frame.add(passText);
+        passText.setBounds(200, 120, 180, 25);
+        backgroundPanel.add(passText);
 
         JButton loginButton = new JButton("Login");
-        loginButton.setBounds(50, 160, 100, 30);
-        frame.add(loginButton);
+        loginButton.setBounds(50, 170, 100, 30);
+        backgroundPanel.add(loginButton);
 
         JButton resetButton = new JButton("Reset");
-        resetButton.setBounds(200, 160, 100, 30);
-        frame.add(resetButton);
+        resetButton.setBounds(200, 170, 100, 30);
+        backgroundPanel.add(resetButton);
 
-        JLabel resultLabel = new JLabel("");
+        JLabel resultLabel = new JLabel("", SwingConstants.CENTER);
         resultLabel.setForeground(Color.WHITE);
-        resultLabel.setBounds(50, 210, 300, 25);
-        frame.add(resultLabel);
+        resultLabel.setBounds(50, 220, 330, 25); 
+        backgroundPanel.add(resultLabel);
 
         loginButton.addActionListener(e -> {
             String username = userText.getText();
@@ -69,6 +101,7 @@ public abstract class Authentication {
                 info.append("Name: ").append(loggedUser.getName()).append("\n");
                 info.append("Email: ").append(loggedUser.getEmail()).append("\n");
                 info.append("Phone: ").append(loggedUser.getPhoneNumber()).append("\n");
+                
 
                 if (loggedUser instanceof Student) {
                     Student s = (Student) loggedUser;
@@ -77,7 +110,9 @@ public abstract class Authentication {
                 } else if (loggedUser instanceof Lecturer) {
                     Lecturer l = (Lecturer) loggedUser;
                     info.append("Department: ").append(l.getDepartment()).append("\n");
-                    info.append("Recommendation: ").append(l.getRecommendation() == null ? "None" : l.getRecommendation()).append("\n");
+                    info.append("Recommendation: ")
+                        .append(l.getRecommendation() == null ? "None" : l.getRecommendation())
+                        .append("\n");
                 }
 
                 JOptionPane.showMessageDialog(frame, "Welcome " + username + "!\n\n" + info.toString());
@@ -95,7 +130,7 @@ public abstract class Authentication {
             resultLabel.setText("");
         });
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
 }
+
