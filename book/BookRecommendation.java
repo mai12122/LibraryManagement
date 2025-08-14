@@ -33,13 +33,6 @@ public class BookRecommendation extends Book {
                 ? "No details provided"
                 : recommendationDetails.trim();
     }
-
-    public void displayRecommendationInfo() {
-        super.displayInfo();
-        System.out.println("Recommended By    : " + recommendedBy);
-        System.out.println("Details           : " + recommendationDetails);
-    }
-
     @Override
     public String toString() {
         return super.toString() +
