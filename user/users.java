@@ -125,19 +125,19 @@ public abstract class users extends Authentication {
         return false;
     }
 
-    public void displayInfo() {
-        System.out.println("User ID  : " + id);
-        System.out.println("Name     : " + name);
-        System.out.println("Email    : " + email);
-        System.out.println("Phone    : " + phoneNumber);
-    }
+ //   public void displayInfo() {
+    //    System.out.println("User ID  : " + id);
+    //  System.out.println("Name     : " + name);
+    //    System.out.println("Email    : " + email);
+    //    System.out.println("Phone    : " + phoneNumber);
+    //}
 
-    public void printUserInfo() {
-        displayInfo();
-        if (this instanceof Student) {
-            ((Student) this).displayStudent();
-        } else if (this instanceof Lecturer) {
-            ((Lecturer) this).displayLecturer();
-        }
-    }
+    //public void printUserInfo() {
+    //    displayInfo();
+    //    if (this instanceof Student) {
+    //        ((Student) this).displayStudent();
+    //    } else if (this instanceof Lecturer) {
+    //        ((Lecturer) this).displayLecturer();
+    //    }
+    //}
 }

@@ -6,7 +6,7 @@ public class Student extends users {
     private String studentClass;
     private LocalDate enrollmentDate; 
 
-    protected  Student(String id, String name, String email, String password, String studentClass, LocalDate enrollmentDate) {
+    public  Student(String id, String name, String email, String password, String studentClass, LocalDate enrollmentDate) {
         super(id, name, email, password);
         setStudentClass(studentClass);
         setEnrollmentDate(enrollmentDate);

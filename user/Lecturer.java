@@ -4,11 +4,12 @@ public class Lecturer extends users {
     private String department;
     private String recommendation;
 
-    public Lecturer(String id, String name, String email, String password, String department) {
-        super(id, name, email, password);
-        setDepartment(department);
-        accountList.add(this);
-    }
+    public Lecturer(String id, String name, String email, String password, String department, String recommendation) {
+    super(id, name, email, password);
+    setDepartment(department);
+    setRecommendation(recommendation);
+    accountList.add(this);
+}
 
     public void displayLecturer() {
         System.out.println("Lecturer Information:");

@@ -2,6 +2,7 @@ package minterface;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.time.LocalDate;
 import javax.swing.*;
 import user.Lecturer;
 import user.Student;
@@ -15,8 +16,9 @@ public abstract class Authentication {
 
     public abstract void register();
 
+    // --- LOGIN GUI ---
     public static void loginGUI() {
-        JFrame frame = new JFrame("Login");
+        JFrame frame = new JFrame("Library Management System - Login");
         frame.setSize(450, 350);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,7 +36,7 @@ public abstract class Authentication {
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
         };
-        backgroundPanel.setLayout(null); 
+        backgroundPanel.setLayout(null);
         frame.setContentPane(backgroundPanel);
 
         JLabel title = new JLabel("Welcome Back!", SwingConstants.CENTER);
@@ -71,9 +73,15 @@ public abstract class Authentication {
         styleButton(resetButton, new Color(231, 76, 60), Color.WHITE);
         backgroundPanel.add(resetButton);
 
+        JButton registerButton = new JButton("Register");
+        registerButton.setBounds(125, 220, 180, 35);
+        styleButton(registerButton, new Color(52, 152, 219), Color.WHITE);
+        backgroundPanel.add(registerButton);
+
         JLabel resultLabel = new JLabel("", SwingConstants.CENTER);
         resultLabel.setForeground(Color.WHITE);
-        resultLabel.setBounds(50, 230, 330, 25); 
+        resultLabel.setBounds(50, 270, 330, 25);
+        backgroundPanel.add(resultLabel);
 
         loginButton.addActionListener(e -> {
             String username = userText.getText();
@@ -90,14 +98,11 @@ public abstract class Authentication {
             if (loggedUser != null) {
                 resultLabel.setForeground(Color.GREEN);
                 resultLabel.setText("Login successful");
-                System.out.println("Login successful for user: " + username);
 
                 StringBuilder info = new StringBuilder();
                 info.append("ID: ").append(loggedUser.getId()).append("\n");
                 info.append("Name: ").append(loggedUser.getName()).append("\n");
                 info.append("Email: ").append(loggedUser.getEmail()).append("\n");
-                info.append("Phone: ").append(loggedUser.getPhoneNumber()).append("\n");
-
 
                 if (loggedUser instanceof Student) {
                     Student s = (Student) loggedUser;
@@ -116,7 +121,6 @@ public abstract class Authentication {
             } else {
                 resultLabel.setForeground(Color.RED);
                 resultLabel.setText("Invalid credentials");
-                System.out.println("Failed login attempt for user: " + username);
             }
         });
 
@@ -126,9 +130,105 @@ public abstract class Authentication {
             resultLabel.setText("");
         });
 
+        registerButton.addActionListener(e -> showRegisterGUI());
+
         frame.setVisible(true);
     }
 
+    public static void showRegisterGUI() {
+        JDialog registerDialog = new JDialog((Frame) null, "Register", true);
+        registerDialog.setSize(450, 400);
+        registerDialog.setLocationRelativeTo(null);
+        registerDialog.setLayout(null);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.setBackground(new Color(58, 123, 213));
+        registerDialog.setContentPane(panel);
+
+        JLabel title = new JLabel("Create Account", SwingConstants.CENTER);
+        title.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        title.setForeground(Color.WHITE);
+        title.setBounds(50, 20, 350, 40);
+        panel.add(title);
+
+        JLabel typeLabel = new JLabel("Account Type:");
+        typeLabel.setForeground(Color.WHITE);
+        typeLabel.setBounds(50, 80, 120, 25);
+        panel.add(typeLabel);
+
+        String[] types = {"Student", "Lecturer"};
+        JComboBox<String> typeCombo = new JComboBox<>(types);
+        typeCombo.setBounds(180, 80, 180, 25);
+        panel.add(typeCombo);
+
+        JLabel idLabel = new JLabel("ID:");
+        idLabel.setForeground(Color.WHITE);
+        idLabel.setBounds(50, 120, 120, 25);
+        panel.add(idLabel);
+
+        JTextField idField = new JTextField();
+        idField.setBounds(180, 120, 180, 25);
+        panel.add(idField);
+
+        JLabel nameLabel = new JLabel("Name:");
+        nameLabel.setForeground(Color.WHITE);
+        nameLabel.setBounds(50, 160, 120, 25);
+        panel.add(nameLabel);
+
+        JTextField nameField = new JTextField();
+        nameField.setBounds(180, 160, 180, 25);
+        panel.add(nameField);
+
+        JLabel emailLabel = new JLabel("Email:");
+        emailLabel.setForeground(Color.WHITE);
+        emailLabel.setBounds(50, 200, 120, 25);
+        panel.add(emailLabel);
+
+        JTextField emailField = new JTextField();
+        emailField.setBounds(180, 200, 180, 25);
+        panel.add(emailField);
+
+        JLabel passLabel = new JLabel("Password:");
+        passLabel.setForeground(Color.WHITE);
+        passLabel.setBounds(50, 240, 120, 25);
+        panel.add(passLabel);
+
+        JPasswordField passField = new JPasswordField();
+        passField.setBounds(180, 240, 180, 25);
+        panel.add(passField);
+
+        JButton registerButton = new JButton("Register");
+        registerButton.setBounds(150, 290, 120, 35);
+        styleButton(registerButton, new Color(46, 204, 113), Color.WHITE);
+        panel.add(registerButton);
+
+        registerButton.addActionListener(e -> {
+            String type = (String) typeCombo.getSelectedItem();
+            String id = idField.getText();
+            String name = nameField.getText();
+            String email = emailField.getText();
+            String password = new String(passField.getPassword());
+
+            if (id.isEmpty() || name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                JOptionPane.showMessageDialog(registerDialog, "Please fill all fields!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            users newUser = null;
+            if (type.equals("Student")) {
+                newUser = new Student(id, name, email, password, "Class A", LocalDate.now());
+            } else if (type.equals("Lecturer")) {
+                newUser = new Lecturer(id, name, email, password, "CS Department", null); 
+            }
+
+            users.accountList.add(newUser);
+            JOptionPane.showMessageDialog(registerDialog, "Registration successful!");
+            registerDialog.dispose();
+        });
+
+        registerDialog.setVisible(true);
+    }
     private static void styleButton(JButton button, Color bgColor, Color fgColor) {
         button.setBackground(bgColor);
         button.setForeground(fgColor);

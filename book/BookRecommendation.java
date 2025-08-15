@@ -4,7 +4,7 @@ public class BookRecommendation extends Book {
     private String recommendedBy;
     private String recommendationDetails;
 
-    public BookRecommendation(
+    protected BookRecommendation(
             String id, String title, String author, String genre,
             String availabilityStatus, String isbnNumber, String locationOnShelf,
             String recommendedBy, String recommendationDetails) {
