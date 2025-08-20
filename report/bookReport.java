@@ -5,11 +5,11 @@ import java.time.LocalDate;
 public class bookReport extends borrowingReport {
     private String specialApproval;
 
-    public bookReport(String id, String generatedBy, String generatedDate,
+    public bookReport(String id, String generatedBy, String generatedDate,String description,
                       String bookTitle, String borrowerId,
                       LocalDate dateBorrowed, LocalDate dueDate,
                       String specialApproval) {
-        super(id, generatedBy, generatedDate, bookTitle, borrowerId, dateBorrowed, dueDate, 0);
+        super(id, generatedBy, generatedDate, description, bookTitle, borrowerId, dateBorrowed, dueDate, 0);
         setSpecialApproval(specialApproval);
     }
 

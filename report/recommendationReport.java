@@ -7,9 +7,9 @@ public class recommendationReport extends Report {
     private String recommendationDetails;
     private LocalDate recommendationDate;
 
-    public recommendationReport(String id, String generatedBy, String generatedDate,
+    public recommendationReport(String id, String generatedBy, String generatedDate,String description,
                                 String recommendedBy, String recommendationDetails, LocalDate recommendationDate) {
-        super(id, generatedBy, generatedDate);
+        super(id, generatedBy, generatedDate,description);
         setRecommendedBy(recommendedBy);
         setRecommendationDetails(recommendationDetails);
         setRecommendationDate(recommendationDate);

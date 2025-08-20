@@ -9,10 +9,10 @@ public class borrowingReport extends Report {
     private int timesRenewed;
     private int totalTimesBorrowed;
 
-    public borrowingReport(String id, String generatedBy, String generatedDate,
+    public borrowingReport(String id, String generatedBy, String generatedDate, String description,
                            String bookTitle, String borrowerId, LocalDate dateBorrowed,
                            LocalDate dueDate, int totalTimesBorrowed) {
-        super(id, generatedBy, generatedDate);
+        super(id, generatedBy, generatedDate, description);
         setBookTitle(bookTitle);
         setBorrowerId(borrowerId);
         setDateBorrowed(dateBorrowed);
