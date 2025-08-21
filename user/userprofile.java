@@ -1,6 +1,4 @@
 package user;
-
-
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
@@ -8,7 +6,7 @@ import javax.swing.*;
 
 public class userprofile {
 
-    private int accountId; // current user account_id
+    private int accountId; 
     private JFrame frame;
     private JTextField nameField, emailField, phoneField;
     private JPasswordField passwordField;
@@ -46,7 +44,6 @@ public class userprofile {
         title.setBounds(50, 20, 350, 40);
         panel.add(title);
 
-        // Labels and Fields
         JLabel nameLabel = new JLabel("Name:");
         nameLabel.setForeground(Color.WHITE);
         nameLabel.setBounds(50, 80, 120, 25);
@@ -54,7 +51,7 @@ public class userprofile {
 
         nameField = new JTextField();
         nameField.setBounds(180, 80, 180, 25);
-        nameField.setEditable(false); // View mode
+        nameField.setEditable(false);
         panel.add(nameField);
 
         JLabel emailLabel = new JLabel("Email:");
@@ -64,7 +61,7 @@ public class userprofile {
 
         emailField = new JTextField();
         emailField.setBounds(180, 120, 180, 25);
-        emailField.setEditable(false); // View mode
+        emailField.setEditable(false); 
         panel.add(emailField);
 
         JLabel phoneLabel = new JLabel("Phone:");
@@ -74,7 +71,7 @@ public class userprofile {
 
         phoneField = new JTextField();
         phoneField.setBounds(180, 160, 180, 25);
-        phoneField.setEditable(false); // View mode
+        phoneField.setEditable(false); 
         panel.add(phoneField);
 
         JLabel passLabel = new JLabel("Password:");
@@ -84,10 +81,10 @@ public class userprofile {
 
         passwordField = new JPasswordField();
         passwordField.setBounds(180, 200, 180, 25);
-        passwordField.setEditable(false); // View mode
+        passwordField.setEditable(false); 
         panel.add(passwordField);
 
-        // Buttons
+        
         editButton = new JButton("Edit");
         editButton.setBounds(50, 260, 100, 35);
         styleButton(editButton, new Color(52, 152, 219), Color.WHITE);
@@ -96,7 +93,7 @@ public class userprofile {
         updateButton = new JButton("Update");
         updateButton.setBounds(180, 260, 120, 35);
         styleButton(updateButton, new Color(46, 204, 113), Color.WHITE);
-        updateButton.setEnabled(false); // Disabled until Edit is clicked
+        updateButton.setEnabled(false); 
         panel.add(updateButton);
 
         editButton.addActionListener(e -> enableEditing(true));
@@ -105,7 +102,7 @@ public class userprofile {
         frame.setContentPane(panel);
         frame.setVisible(true);
 
-        loadUserInfo(); // Load from DB
+        loadUserInfo(); 
     }
 
     private void enableEditing(boolean enable) {
@@ -160,7 +157,7 @@ public class userprofile {
 
             JOptionPane.showMessageDialog(frame, "Profile updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
-            enableEditing(false); // Disable editing after update
+            enableEditing(false); 
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(frame, "Failed to update profile: " + ex.getMessage(),

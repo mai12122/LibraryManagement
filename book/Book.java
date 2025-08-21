@@ -26,14 +26,11 @@ public abstract class Book implements Comparable<Book> {
         this.category = category;
     }
 
-    // --- Getters ---
     public String getId() { return id; }
     public String getTitle() { return title; }
     public String getAuthor() { return author; }
     public String getGenre() { return genre; }
     public String getAvailabilityStatus() { return availabilityStatus; }
-
-    // --- GUI ---
     public static void fetchBooksFromDB_GUI() {
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(new Object[]{
@@ -169,7 +166,7 @@ public abstract class Book implements Comparable<Book> {
              PreparedStatement ps = conn.prepareStatement(
                      "INSERT INTO Borrowings (account_id, book_id, borrow_date, due_date) VALUES (?, ?, ?, ?)")) {
 
-            ps.setInt(1, 1); // replace with current user's account_id if needed
+            ps.setInt(1, 1); 
             ps.setInt(2, bookId);
             ps.setDate(3, Date.valueOf(today));
             ps.setDate(4, Date.valueOf(dueDate));
