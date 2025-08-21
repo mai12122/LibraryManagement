@@ -16,7 +16,7 @@ public abstract class Authentication {
 
     public abstract void register();
 
-    // --- LOGIN GUI ---
+   
     public static void loginGUI() {
         JFrame frame = new JFrame("Library Management System - Login");
         frame.setSize(450, 350);
