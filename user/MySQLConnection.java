@@ -9,19 +9,20 @@ import java.sql.Statement;
 public class MySQLConnection {
 
     private static Connection connection = null;
-    private static final String URL = "jdbc:mysql://localhost:3306/LMSs6";
+    private static final String URL = "jdbc:mysql://localhost:3306/LMs01";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "$Nuth170124$";
 
+    // Always return the same connection
     public static Connection getConnection() {
-        if (connection == null) {
-            try {
+        try {
+            if (connection == null || connection.isClosed()) {
                 connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
                 System.out.println("Connected to MySQL successfully!");
-            } catch (Exception e) {
-                System.out.println("Connection failed!");
-                e.printStackTrace();
             }
+        } catch (SQLException e) {
+            System.out.println("Connection failed!");
+            e.printStackTrace();
         }
         return connection;
     }
@@ -48,6 +49,7 @@ public class MySQLConnection {
         return 0;
     }
 
+    // Call this only when program exits
     public static void closeConnection() {
         if (connection != null) {
             try {
@@ -63,8 +65,6 @@ public class MySQLConnection {
 
     public static void main(String[] args) {
         try {
-            getConnection();
-
             String query = "SELECT id, username, email FROM Accounts";
             ResultSet rs = executeQuery(query);
 
@@ -77,8 +77,6 @@ public class MySQLConnection {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            closeConnection();
         }
     }
 }
