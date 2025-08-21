@@ -1,6 +1,7 @@
 package report;
 
 import java.time.LocalDate;
+
 public class borrowingReport extends Report {
     private String bookTitle;
     private String borrowerId;
@@ -22,28 +23,22 @@ public class borrowingReport extends Report {
     }
 
     public String getBookTitle() {
-        if (bookTitle == null || bookTitle.isEmpty()) {
-            return "Title not available";
-        }
-        return bookTitle;
+        return bookTitle != null && !bookTitle.isEmpty() ? bookTitle : "Title not available";
     }
 
     public void setBookTitle(String bookTitle) {
         if (bookTitle != null && !bookTitle.trim().isEmpty()) {
-            this.bookTitle = bookTitle;
+            this.bookTitle = bookTitle.trim();
         }
     }
 
     public String getBorrowerId() {
-        if (borrowerId == null || borrowerId.trim().isEmpty()) {
-            return "No borrower assigned";
-        }
-        return borrowerId;
+        return borrowerId != null && !borrowerId.trim().isEmpty() ? borrowerId : "No borrower assigned";
     }
 
     public void setBorrowerId(String borrowerId) {
         if (borrowerId != null && !borrowerId.trim().isEmpty()) {
-            this.borrowerId = borrowerId;
+            this.borrowerId = borrowerId.trim();
         }
     }
 
@@ -135,7 +130,7 @@ public class borrowingReport extends Report {
         return getBookTitle().equals(other.getBookTitle())
                 && getBorrowerId().equals(other.getBorrowerId())
                 && getDateBorrowed().equals(other.getDateBorrowed())
-                && getDueDate().equals(other.getDueDate())
+                && ((getDueDate() == null && other.getDueDate() == null) || (getDueDate() != null && getDueDate().equals(other.getDueDate())))
                 && getTimesRenewed() == other.getTimesRenewed()
                 && getTotalTimesBorrowed() == other.getTotalTimesBorrowed();
     }
