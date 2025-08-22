@@ -6,31 +6,98 @@ import java.sql.*;
 import java.time.LocalDate;
 import javax.swing.*;
 import javax.swing.table.*;
+
 import user.MySQLConnection;
 
 public abstract class Book implements Comparable<Book> {
-    private String id, title, author, genre, availabilityStatus, isbn, publishedYear, publishedCountry, language, category;
+    private String id;
+    private String title;
+    private String author;
+    private String genre;
+    private String availabilityStatus;
+    private String isbn;
+    private String publishedYear;
+    private String publishedCountry;
+    private String language;
+    private String category;
 
     protected Book(String id, String title, String author, String genre, String status,
                    String isbn, String publishedYear, String publishedCountry,
                    String language, String category) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.genre = genre;
-        this.availabilityStatus = status;
-        this.isbn = isbn;
-        this.publishedYear = publishedYear;
-        this.publishedCountry = publishedCountry;
-        this.language = language;
-        this.category = category;
+        setId(id);
+        setTitle(title);
+        setAuthor(author);
+        setGenre(genre);
+        setAvailabilityStatus(status);
+        setIsbn(isbn);
+        setPublishedYear(publishedYear);
+        setPublishedCountry(publishedCountry);
+        setLanguage(language);
+        setCategory(category);
     }
 
     public String getId() { return id; }
+    public void setId(String id) {
+        if (id != null && !id.trim().isEmpty()) this.id = id;
+        else throw new IllegalArgumentException("ID cannot be empty.");
+    }
+
     public String getTitle() { return title; }
+    public void setTitle(String title) {
+        if (title != null && !title.trim().isEmpty()) this.title = title;
+        else throw new IllegalArgumentException("Title cannot be empty.");
+    }
+
     public String getAuthor() { return author; }
+    public void setAuthor(String author) {
+        if (author != null && !author.trim().isEmpty()) this.author = author;
+        else throw new IllegalArgumentException("Author cannot be empty.");
+    }
+
     public String getGenre() { return genre; }
+    public void setGenre(String genre) {
+        if (genre != null && !genre.trim().isEmpty()) this.genre = genre;
+        else throw new IllegalArgumentException("Genre cannot be empty.");
+    }
+
     public String getAvailabilityStatus() { return availabilityStatus; }
+    public void setAvailabilityStatus(String availabilityStatus) {
+        if (availabilityStatus != null &&
+            (availabilityStatus.equalsIgnoreCase("Available") || availabilityStatus.equalsIgnoreCase("Unavailable")))
+            this.availabilityStatus = availabilityStatus;
+        else throw new IllegalArgumentException("Status must be 'Available' or 'Unavailable'.");
+    }
+
+    public String getIsbn() { return isbn; }
+    public void setIsbn(String isbn) {
+        if (isbn != null && isbn.matches("\\d{10}|\\d{13}")) this.isbn = isbn;
+        else throw new IllegalArgumentException("Invalid ISBN format.");
+    }
+
+    public String getPublishedYear() { return publishedYear; }
+    public void setPublishedYear(String publishedYear) {
+        if (publishedYear != null && publishedYear.matches("\\d{4}")) this.publishedYear = publishedYear;
+        else throw new IllegalArgumentException("Invalid Published Year.");
+    }
+
+    public String getPublishedCountry() { return publishedCountry; }
+    public void setPublishedCountry(String publishedCountry) {
+        if (publishedCountry != null && !publishedCountry.trim().isEmpty()) this.publishedCountry = publishedCountry;
+        else throw new IllegalArgumentException("Published Country cannot be empty.");
+    }
+
+    public String getLanguage() { return language; }
+    public void setLanguage(String language) {
+        if (language != null && !language.trim().isEmpty()) this.language = language;
+        else throw new IllegalArgumentException("Language cannot be empty.");
+    }
+
+    public String getCategory() { return category; }
+    public void setCategory(String category) {
+        if (category != null && !category.trim().isEmpty()) this.category = category;
+        else throw new IllegalArgumentException("Category cannot be empty.");
+    }
+
     public static void fetchBooksFromDB_GUI() {
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(new Object[]{
@@ -38,7 +105,8 @@ public abstract class Book implements Comparable<Book> {
             "Year", "Country", "Language", "Category", "Status"
         });
 
-        String query = "SELECT id, title, author, genre, isbn, published_year, published_country, lang_name, b_categories, is_available FROM Books";
+        String query = "SELECT id, title, author, genre, isbn, published_year, " +
+                       "published_country, lang_name, b_categories, is_available FROM Books";
 
         try (Connection conn = MySQLConnection.getConnection();
              Statement stmt = conn.createStatement();
@@ -156,7 +224,10 @@ public abstract class Book implements Comparable<Book> {
 
     private static void handleBorrow(JTable table) {
         int row = table.getSelectedRow();
-        if (row == -1) { JOptionPane.showMessageDialog(null, "Select a book first!"); return; }
+        if (row == -1) { 
+            JOptionPane.showMessageDialog(null, "Select a book first!"); 
+            return; 
+        }
 
         int bookId = Integer.parseInt(table.getValueAt(row, 0).toString());
         LocalDate today = LocalDate.now();
@@ -190,8 +261,10 @@ public abstract class Book implements Comparable<Book> {
 
     @Override
     public int compareTo(Book other) { 
-        return this.id.compareTo(other.id); }
+        return this.id.compareTo(other.id); 
+    }
 
     public static void main(String[] args) { 
-        SwingUtilities.invokeLater(Book::fetchBooksFromDB_GUI); }
+        SwingUtilities.invokeLater(Book::fetchBooksFromDB_GUI); 
+    }
 }
