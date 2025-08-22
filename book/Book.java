@@ -6,7 +6,6 @@ import java.sql.*;
 import java.time.LocalDate;
 import javax.swing.*;
 import javax.swing.table.*;
-
 import user.MySQLConnection;
 
 public abstract class Book implements Comparable<Book> {
@@ -36,67 +35,87 @@ public abstract class Book implements Comparable<Book> {
         setCategory(category);
     }
 
-    public String getId() { return id; }
-    public void setId(String id) {
-        if (id != null && !id.trim().isEmpty()) this.id = id;
-        else throw new IllegalArgumentException("ID cannot be empty.");
-    }
+        public String getId() { 
+            return id; 
+        }
+        protected void setId(String id) {
+            if (id != null && !id.trim().isEmpty()) this.id = id;
+            else throw new IllegalArgumentException("ID cannot be empty.");
+        }
 
-    public String getTitle() { return title; }
-    public void setTitle(String title) {
-        if (title != null && !title.trim().isEmpty()) this.title = title;
-        else throw new IllegalArgumentException("Title cannot be empty.");
-    }
+        public String getTitle() { 
+            return title; 
+        }
+        protected void setTitle(String title) {
+            if (title != null && !title.trim().isEmpty()) this.title = title;
+            else throw new IllegalArgumentException("Title cannot be empty.");
+        }
 
-    public String getAuthor() { return author; }
-    public void setAuthor(String author) {
-        if (author != null && !author.trim().isEmpty()) this.author = author;
-        else throw new IllegalArgumentException("Author cannot be empty.");
-    }
+        public String getAuthor() { 
+            return author; 
+        }
+        protected void setAuthor(String author) {
+            if (author != null && !author.trim().isEmpty()) this.author = author;
+            else throw new IllegalArgumentException("Author cannot be empty.");
+        }
 
-    public String getGenre() { return genre; }
-    public void setGenre(String genre) {
-        if (genre != null && !genre.trim().isEmpty()) this.genre = genre;
-        else throw new IllegalArgumentException("Genre cannot be empty.");
-    }
+        public String getGenre() { 
+            return genre; 
+        }
+        protected void setGenre(String genre) {
+            if (genre != null && !genre.trim().isEmpty()) this.genre = genre;
+            else throw new IllegalArgumentException("Genre cannot be empty.");
+        }
 
-    public String getAvailabilityStatus() { return availabilityStatus; }
-    public void setAvailabilityStatus(String availabilityStatus) {
-        if (availabilityStatus != null &&
-            (availabilityStatus.equalsIgnoreCase("Available") || availabilityStatus.equalsIgnoreCase("Unavailable")))
-            this.availabilityStatus = availabilityStatus;
-        else throw new IllegalArgumentException("Status must be 'Available' or 'Unavailable'.");
-    }
+        public String getAvailabilityStatus() { 
+            return availabilityStatus; 
+        }
+        protected void setAvailabilityStatus(String availabilityStatus) {
+            if (availabilityStatus != null &&
+                (availabilityStatus.equalsIgnoreCase("Available") || availabilityStatus.equalsIgnoreCase("Unavailable")))
+                this.availabilityStatus = availabilityStatus;
+            else throw new IllegalArgumentException("Status must be 'Available' or 'Unavailable'.");
+        }
 
-    public String getIsbn() { return isbn; }
-    public void setIsbn(String isbn) {
-        if (isbn != null && isbn.matches("\\d{10}|\\d{13}")) this.isbn = isbn;
-        else throw new IllegalArgumentException("Invalid ISBN format.");
-    }
+        public String getIsbn() { 
+            return isbn; 
+        }
+        protected void setIsbn(String isbn) {
+            if (isbn != null && isbn.matches("\\d{10}|\\d{13}")) this.isbn = isbn;
+            else throw new IllegalArgumentException("Invalid ISBN format.");
+        }
 
-    public String getPublishedYear() { return publishedYear; }
-    public void setPublishedYear(String publishedYear) {
-        if (publishedYear != null && publishedYear.matches("\\d{4}")) this.publishedYear = publishedYear;
-        else throw new IllegalArgumentException("Invalid Published Year.");
-    }
+        public String getPublishedYear() { 
+            return publishedYear; 
+        }
+        protected void setPublishedYear(String publishedYear) {
+            if (publishedYear != null && publishedYear.matches("\\d{4}")) this.publishedYear = publishedYear;
+            else throw new IllegalArgumentException("Invalid Published Year.");
+        }
 
-    public String getPublishedCountry() { return publishedCountry; }
-    public void setPublishedCountry(String publishedCountry) {
-        if (publishedCountry != null && !publishedCountry.trim().isEmpty()) this.publishedCountry = publishedCountry;
-        else throw new IllegalArgumentException("Published Country cannot be empty.");
-    }
+        public String getPublishedCountry() { 
+            return publishedCountry; 
+        }
+        protected void setPublishedCountry(String publishedCountry) {
+            if (publishedCountry != null && !publishedCountry.trim().isEmpty()) this.publishedCountry = publishedCountry;
+            else throw new IllegalArgumentException("Published Country cannot be empty.");
+        }
 
-    public String getLanguage() { return language; }
-    public void setLanguage(String language) {
-        if (language != null && !language.trim().isEmpty()) this.language = language;
-        else throw new IllegalArgumentException("Language cannot be empty.");
-    }
+        public String getLanguage() { 
+            return language; 
+        }
+        protected void setLanguage(String language) {
+            if (language != null && !language.trim().isEmpty()) this.language = language;
+            else throw new IllegalArgumentException("Language cannot be empty.");
+        }
 
-    public String getCategory() { return category; }
-    public void setCategory(String category) {
-        if (category != null && !category.trim().isEmpty()) this.category = category;
-        else throw new IllegalArgumentException("Category cannot be empty.");
-    }
+        public String getCategory() { 
+            return category; 
+        }
+        protected void setCategory(String category) {
+            if (category != null && !category.trim().isEmpty()) this.category = category;
+            else throw new IllegalArgumentException("Category cannot be empty.");
+        }
 
     public static void fetchBooksFromDB_GUI() {
         DefaultTableModel model = new DefaultTableModel();
