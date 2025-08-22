@@ -11,10 +11,18 @@ public class BookRecommendation extends Book {
     private String recommendationDetails;
 
     public BookRecommendation(
-            String id, String title, String author, String genre,
-            String availabilityStatus, String isbn, String publishedYear,
-            String publishedCountry, String language, String category,
-            String recommendedBy, String recommendationDetails) {
+            String id, 
+            String title, 
+            String author, 
+            String genre,
+            String availabilityStatus, 
+            String isbn, 
+            String publishedYear,
+            String publishedCountry, 
+            String language, 
+            String category,
+            String recommendedBy, 
+            String recommendationDetails) {
 
         super(id, title, author, genre, availabilityStatus, isbn, publishedYear,
               publishedCountry, language, category);
@@ -52,7 +60,6 @@ public class BookRecommendation extends Book {
                (recommendationDetails != null ? recommendationDetails.equals(other.recommendationDetails) : other.recommendationDetails == null);
     }
 
-    /*** DATABASE METHODS ***/
     public boolean saveToDB() {
         String query = "INSERT INTO BookRecommendations (book_id, recommended_by, recommendation_details) VALUES (?, ?, ?)";
         try (Connection conn = MySQLConnection.getConnection();

@@ -69,7 +69,6 @@ public class BookBorrowing extends Book {
                 '}';
     }
 
-    // ---------------- GUI ----------------
     public static void fetchBorrowingsFromDB_GUI() {
         String query = "SELECT b.borrowing_id, bk.title, bk.author, bk.genre, " +
                        "b.borrower_name, b.borrow_date, b.return_date " +

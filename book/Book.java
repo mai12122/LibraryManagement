@@ -189,7 +189,9 @@ public abstract class Book implements Comparable<Book> {
     }
 
     @Override
-    public int compareTo(Book other) { return this.id.compareTo(other.id); }
+    public int compareTo(Book other) { 
+        return this.id.compareTo(other.id); }
 
-    public static void main(String[] args) { SwingUtilities.invokeLater(Book::fetchBooksFromDB_GUI); }
+    public static void main(String[] args) { 
+        SwingUtilities.invokeLater(Book::fetchBooksFromDB_GUI); }
 }

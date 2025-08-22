@@ -12,8 +12,6 @@ public class MySQLConnection {
     private static final String URL = "jdbc:mysql://localhost:3306/LMs01";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "$Nuth170124$";
-
-    // Always return the same connection
     public static Connection getConnection() {
         try {
             if (connection == null || connection.isClosed()) {
@@ -49,7 +47,6 @@ public class MySQLConnection {
         return 0;
     }
 
-    // Call this only when program exits
     public static void closeConnection() {
         if (connection != null) {
             try {
